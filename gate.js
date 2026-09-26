@@ -4,6 +4,27 @@
   var pwEl = document.getElementById("pw");
   var errEl = document.getElementById("err");
   var goBtn = document.getElementById("go");
+  var bootEl = document.getElementById("boot");
+  var gateEl = document.getElementById("gate");
+  var reduceMotion = false;
+  try {
+    reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  } catch (e) {}
+
+  function finishBoot() {
+    if (bootEl) {
+      bootEl.classList.add("done");
+      bootEl.setAttribute("aria-hidden", "true");
+    }
+    if (gateEl) gateEl.classList.add("show");
+    if (pwEl && !goBtn.disabled) pwEl.focus();
+  }
+
+  if (reduceMotion) {
+    finishBoot();
+  } else {
+    setTimeout(finishBoot, 1250);
+  }
 
   function b64ToBytes(b64) {
     var bin = atob(b64);
@@ -98,9 +119,8 @@
       } catch (e) {}
       goBtn.disabled = false;
       goBtn.textContent = "Unlock";
+      finishBoot();
       pwEl.focus();
     });
-  } else {
-    pwEl.focus();
   }
 })();
