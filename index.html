@@ -1,1 +1,89 @@
-"Hello World" 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Field Manual</title>
+  <meta name="description" content="Encrypted modular offensive field manuals — AD, Web, Bug bounty, OSINT." />
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Outfit:wght@400;550;650;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="boot">
+  <div class="scanlines" aria-hidden="true"></div>
+  <div class="grid-bg" aria-hidden="true"></div>
+  <div class="noise" aria-hidden="true"></div>
+
+  <div id="site-gate" class="gate-screen">
+    <div class="gate-panel" role="dialog" aria-modal="true" aria-labelledby="gate-title">
+      <div class="gate-brand">
+        <div class="mark" aria-hidden="true"></div>
+        <div>
+          <p class="tty" id="boot-line"><span class="cursor-blink">_</span> field_manual boot</p>
+          <h1 id="gate-title">Field Manual</h1>
+        </div>
+      </div>
+      <p class="gate-blurb">
+        Ciphertext vaults only. Enter the shared password to decrypt in this tab.
+        Static hosting cannot do real auth — keep the repo private.
+      </p>
+      <form id="gate-form" autocomplete="off" method="post" action="#">
+        <label for="pw">Access key</label>
+        <input
+          id="pw"
+          name="fm-access"
+          type="password"
+          autocomplete="new-password"
+          autocapitalize="off"
+          autocorrect="off"
+          spellcheck="false"
+          data-lpignore="true"
+          data-1p-ignore="true"
+          required
+        />
+        <p class="err" id="gate-err" role="alert"></p>
+        <div class="row">
+          <button type="submit" class="btn primary" id="gate-go">Unlock</button>
+        </div>
+      </form>
+      <p class="gate-foot tty">AES-GCM · PBKDF2-SHA256 · 210k iter</p>
+    </div>
+  </div>
+
+  <div id="site-shell" class="wrap" hidden>
+    <header class="top">
+      <div class="brand">
+        <div class="mark" aria-hidden="true"></div>
+        <div>
+          <h1>Field Manual</h1>
+          <p>ELMERIKH · Cheatsheets · session live</p>
+        </div>
+      </div>
+      <button type="button" class="btn" id="lock-out" onclick="FieldManual.lockNow()">Lock</button>
+    </header>
+
+    <section class="hero">
+      <h2>Domains online.<br /><span class="glow-text">Pick a vault.</span></h2>
+      <p class="lede">
+        Markdown stays encrypted at rest. This tab holds the key in sessionStorage only.
+      </p>
+    </section>
+
+    <section class="grid" id="domain-grid" aria-label="Domains"></section>
+
+    <aside class="note">
+      <strong>Honesty check.</strong>
+      Client-side crypto is not server auth. Ciphertext is downloadable; brute-force remains possible.
+      Never commit <code>site/access.key</code>. Rebuild with <code>python site/build_pages.py</code>.
+    </aside>
+  </div>
+
+  <script src="crypto.js"></script>
+  <script src="app.js"></script>
+  <script>
+    FieldManual.initLanding();
+  </script>
+</body>
+</html>

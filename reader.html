@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Reader · Field Manual</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Outfit:wght@400;550;650;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="scanlines" aria-hidden="true"></div>
+  <div class="grid-bg" aria-hidden="true"></div>
+  <div class="noise" aria-hidden="true"></div>
+
+  <div id="lock" class="lock-screen" hidden>
+    <div class="gate-panel modal">
+      <h3>Session locked</h3>
+      <p>Password required to decrypt this domain.</p>
+      <form id="lock-form" autocomplete="off" method="post" action="#">
+        <label for="pw2">Access key</label>
+        <input
+          id="pw2"
+          name="fm-access"
+          type="password"
+          autocomplete="new-password"
+          autocapitalize="off"
+          autocorrect="off"
+          spellcheck="false"
+          data-lpignore="true"
+          data-1p-ignore="true"
+          required
+        />
+        <p class="err" id="lock-err" role="alert"></p>
+        <div class="row">
+          <a class="btn" href="./">Home</a>
+          <button type="submit" class="btn primary" id="lock-go">Unlock</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="reader" id="reader" hidden>
+    <aside class="sidebar">
+      <div class="side-head">
+        <strong id="side-title">Domain</strong>
+        <div class="side-actions">
+          <a href="./">← Home</a>
+          <button type="button" class="linkish" onclick="FieldManual.lockNow()">Lock</button>
+        </div>
+      </div>
+      <input class="search" id="search" type="search" placeholder="Search titles…" autocomplete="off" />
+      <nav id="nav" aria-label="Documents"></nav>
+    </aside>
+    <main class="main">
+      <header class="doc-head">
+        <h1 id="doc-title">…</h1>
+        <p class="sub" id="doc-sub"></p>
+      </header>
+      <article class="article" id="article"></article>
+    </main>
+  </div>
+
+  <script src="vendor/marked.min.js"></script>
+  <script src="crypto.js"></script>
+  <script src="app.js"></script>
+  <script>
+    FieldManual.initReader();
+  </script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+{
+  "name": "Field Manual",
+  "tagline": "Modular offensive cheat sheets \u2014 encrypted at rest in the browser bundle.",
+  "domains": [
+    {
+      "id": "ad",
+      "title": "Active Directory",
+      "blurb": "Internal AD methodology \u2014 prep through apps, trusts, AD CS, relay.",
+      "accent": "#3dd6c6",
+      "count": 22,
+      "vault": "data/ad.vault.json"
+    },
+    {
+      "id": "web",
+      "title": "Web",
+      "blurb": "API recon, auth bypass, access control, injection routing.",
+      "accent": "#7eb6ff",
+      "count": 5,
+      "vault": "data/web.vault.json"
+    },
+    {
+      "id": "bug-bounty",
+      "title": "Bug bounty",
+      "blurb": "Non-linear hunt workflow, pattern index, reporting discipline.",
+      "accent": "#f0a45d",
+      "count": 4,
+      "vault": "data/bug-bounty.vault.json"
+    },
+    {
+      "id": "osint",
+      "title": "OSINT",
+      "blurb": "External recon pipeline, confidence levels, arsenal notes.",
+      "accent": "#c4a7e7",
+      "count": 4,
+      "vault": "data/osint.vault.json"
+    }
+  ],
+  "gate": "client-aes-gcm"
+}
